@@ -4,16 +4,27 @@
   <meta charset="UTF-8">
   <title>ɫɫɫ</title>
   <script>
-    // window.onload = function() {
-    //   window.location.href = 'http://roupu108.buzz';
-    // };
-    window.onload = function() {
-      window.history.pushState({}, '', window.location.href);
-      window.location.replace('http://roupu108.buzz');
-    };
-  </script>
+	    window.onload = function() {
+	      var countdown = 5;
+	      var countdownElement = document.getElementById('countdown');
+
+	      function updateCountdown() {
+	        countdown--;
+	        countdownElement.textContent = countdown;
+
+	        if (countdown === 0) {
+	          window.location.href = 'http://roupu108.buzz';
+	        } else {
+	          setTimeout(updateCountdown, 1000); // 每秒更新倒计时
+	        }
+	      }
+
+	      updateCountdown();
+	    };
+  	</script>
 </head>
 <body>
   <h1>该来的在路上了。。。。。。。。。</h1>
+  <h2><p>页面将在 <span id="countdown">5</span> 秒后跳转。。。</p></h2>
 </body>
 </html>
