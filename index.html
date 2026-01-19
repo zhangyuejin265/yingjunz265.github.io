@@ -75,14 +75,81 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 100px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .modal-content button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #submitPassword {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>AV导航 陈志杰专用 专用陈志杰</h1>
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>密码验证</h2>
+            <p>请输入密码：</p>
+            <input type="password" id="passwordInput">
+            <button id="submitPassword">提交</button>
+        </div>
+    </div>
+
+    <div id="ageModal" class="modal">
+        <div class="modal-content">
+            <h2>年龄确认</h2>
+            <p>您是否已满18岁？</p>
+            <button id="yesBtn">是</button>
+            <button id="noBtn">否</button>
+        </div>
+    </div>
+
+    <header style="display: none;" id="mainHeader">
+        <h1>AV导航</h1>
         <p>一站式成人视频网站导航，快速跳转到热门AV站点。请确保您已满18岁，并遵守当地法律法规。</p>
     </header>
-    <div class="container">
+    <div class="container" style="display: none;" id="mainContent">
         <div class="warning">警告：本页面仅供成人使用。未满18岁请立即离开！</div>
         
         <div class="section">
@@ -240,8 +307,51 @@
             </div>
         </div>
     </div>
-    <footer>
+    <footer style="display: none;" id="mainFooter">
         <p>本页面仅为导航用途，不存储任何内容。所有链接指向第三方网站，与本站无关。请理性使用。</p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var passwordModal = document.getElementById("passwordModal");
+            var ageModal = document.getElementById("ageModal");
+            passwordModal.style.display = "block";
+
+            var passwordInput = document.getElementById("passwordInput");
+            var submitPassword = document.getElementById("submitPassword");
+
+            function checkPassword() {
+                var password = passwordInput.value;
+                if (password === "zyj888.top") {
+                    passwordModal.style.display = "none";
+                    ageModal.style.display = "block";
+                } else {
+                    alert("密码错误！");
+                    window.location.href = "https://www.baidu.com";
+                }
+            }
+
+            submitPassword.onclick = checkPassword;
+
+            passwordInput.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    checkPassword();
+                }
+            });
+
+            document.getElementById("yesBtn").onclick = function() {
+                ageModal.style.display = "none";
+                document.getElementById("mainHeader").style.display = "block";
+                document.getElementById("mainContent").style.display = "block";
+                document.getElementById("mainFooter").style.display = "block";
+            };
+
+            document.getElementById("noBtn").onclick = function() {
+                alert("您未满18岁，无法访问本页面。");
+                window.location.href = "https://www.baidu.com"; // 可以重定向到其他页面
+            };
+        });
+    </script>
 </body>
 </html>
