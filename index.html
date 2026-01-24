@@ -129,8 +129,8 @@
 <body>
     <div id="passwordModal" class="modal">
         <div class="modal-content">
-            <h2>密码验证</h2>
-            <p>请输入密码：</p>
+            <h2>验证</h2>
+            <p>请输入ZYJ全名：</p>
             <input type="password" id="passwordInput">
             <button id="submitPassword">提交</button>
         </div>
@@ -322,7 +322,7 @@
 
             function checkPassword() {
                 var password = passwordInput.value;
-                if (password === "zyj888.top") {
+                if (password === "张跃进") {
                     passwordModal.style.display = "none";
                     ageModal.style.display = "block";
                 } else {
@@ -355,3 +355,4 @@
     </script>
 </body>
 </html>
+
